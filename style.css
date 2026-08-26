@@ -1,4 +1,4 @@
-﻿* {
+* {
   box-sizing:border-box
 }
 html {
@@ -108,41 +108,42 @@ body.ready .navbar {
   align-content:center;
   gap:18px;
   color:#fff;
-  transition:opacity 1s var(--ease),visibility 1s var(--ease)
+  transition:opacity 1.35s var(--ease),visibility 1.35s var(--ease)
 }
 .loader.done {
   opacity:0;
   visibility:hidden
 }
+.loader.done .loader-drop {
+  opacity:0;
+  transform:scale(8);
+  transition:opacity 1.1s var(--ease),transform 1.1s var(--ease)
+}
+.loader.done .loader-label {
+  opacity:0;
+  transform:translateY(10px);
+  transition:opacity .7s var(--ease),transform .7s var(--ease)
+}
 .loader-drop {
-  width:90px;
+  width:96px;
   height:120px;
-  position:relative;
+  display:block;
+  transform:scale(1);
+  transform-origin:center;
+  transition:opacity .25s ease,transform .25s ease;
   filter:drop-shadow(0 0 16px rgba(64,170,255,.25));
-  overflow:hidden
+  overflow:visible
 }
-.loader-drop:before {
-  content:"";
-  position:absolute;
-  left:17px;
-  top:0;
-  width:56px;
-  height:82px;
-  border:3px solid rgba(255,255,255,.85);
-  border-radius:60% 60% 55% 55% / 65% 65% 38% 38%;
-  transform:rotate(45deg) translate(8px,0);
-  transform-origin:center
+.loader-drop-outline {
+  fill:none;
+  stroke:rgba(255,255,255,.9);
+  stroke-width:5;
+  stroke-linejoin:round
 }
-.loader-drop:after {
-  content:"";
-  position:absolute;
-  left:15px;
-  bottom:5px;
-  width:60px;
-  height:75px;
-  border-radius:0 0 38px 38px;
-  background:linear-gradient(to top,#fff 0,#fff 50%,transparent 50%);
-  animation:fillDrop 1.35s ease-in-out infinite alternate
+.loader-water-fill {
+  fill:#fff;
+  transform:translateY(150px);
+  animation:fillDrop 2.4s ease-in-out infinite alternate
 }
 .loader-label {
   font:600 11px var(--display);
@@ -151,7 +152,7 @@ body.ready .navbar {
 }
 @keyframes fillDrop {
   from {
-  transform:translateY(20px);
+  transform:translateY(150px);
   opacity:.35
 }
 to {
