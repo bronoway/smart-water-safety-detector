@@ -4,13 +4,14 @@
 // Admin SDK/service-account private key or your Wokwi email/password here.
 
 export const firebaseConfig = {
-  apiKey: "YOUR_FIREBASE_WEB_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.firebasestorage.app",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_FIREBASE_WEB_APP_ID"
+  apiKey: "AIzaSyBOLFexgba_D6Ra4i15eCrwOh4QerOKDgc",
+  authDomain: "smart-water-safety-detector.firebaseapp.com",
+  databaseURL: "https://smart-water-safety-detector-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "smart-water-safety-detector",
+  storageBucket: "smart-water-safety-detector.firebasestorage.app",
+  messagingSenderId: "480467978175",
+  appId: "1:480467978175:web:4c6fc7705fe611d028430a",
+  measurementId: "G-04Q0V9XFBN"
 };
 
 export const THRESHOLDS = {
