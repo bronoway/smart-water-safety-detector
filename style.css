@@ -265,7 +265,16 @@ to {
   letter-spacing:-.07em;
   margin-top:40px;
   position:relative;
-  z-index:1
+  z-index:1;
+  transform-origin:left center;
+  animation:hero-status-pulse 5s ease-in-out infinite
+}
+@keyframes hero-status-pulse {
+  0%,100% { opacity:.96; transform:scale(1) }
+  50% { opacity:1; transform:scale(1.015) }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-status { animation:none }
 }
 .hero-status-line {
   display:flex;
