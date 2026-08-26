@@ -210,6 +210,6 @@ function setupModal(){
 }
 
 window.addEventListener("load",async()=>{
-  await sleep(700); $("#loader").classList.add("done"); document.body.classList.add("ready"); await sleep(300);
+  await sleep(950); $("#loader").classList.add("done"); document.body.classList.add("ready"); await sleep(300);
   setupNavigation(); setupReveal(); setupParallax(); setupScrollCue(); setupTempSwitch(); setupModal(); render(); connectLive();
 });
