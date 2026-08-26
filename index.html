@@ -13,7 +13,17 @@
 </head>
 <body>
   <div class="loader" id="loader" aria-hidden="true">
-    <div class="loader-drop"><span></span></div>
+    <svg class="loader-drop" viewBox="0 0 120 150" role="img" aria-label="Loading">
+      <defs>
+        <clipPath id="dropClip">
+          <path d="M60 8C60 8 14 58 14 91a46 46 0 0 0 92 0C106 58 60 8 60 8Z" />
+        </clipPath>
+      </defs>
+      <path class="loader-drop-outline" d="M60 8C60 8 14 58 14 91a46 46 0 0 0 92 0C106 58 60 8 60 8Z" />
+      <g class="loader-water" clip-path="url(#dropClip)">
+        <path class="loader-water-fill" d="M0 150V0H120V150Z" />
+      </g>
+    </svg>
     <div class="loader-label">INITIALIZING WATER SAFETY SYSTEM</div>
   </div>
 
