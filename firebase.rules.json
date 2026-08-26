@@ -1,0 +1,8 @@
+{
+  "rules": {
+    "waterData": {
+      ".read": "auth != null",
+      ".write": "auth != null && auth.token.firebase.sign_in_provider == 'password'"
+    }
+  }
+}

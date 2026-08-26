@@ -1,0 +1,16 @@
+:root{
+  --bg:#fff;
+  --ink:#0a2440;
+  --muted:#607080;
+  --line:rgba(10,36,64,.16);
+  --soft:#f4f7f9;
+  --safe:#00ff50;
+  --unsafe:#ff0020;
+  --neutral:#a8b0b8;
+  --shadow:0 18px 55px rgba(10,36,64,.10);
+  --max:1240px;
+  --radius:30px;
+  --display:"Space Grotesk",system-ui,sans-serif;
+  --body:"DM Sans",system-ui,sans-serif;
+  --ease:cubic-bezier(.22,.8,.2,1);
+}

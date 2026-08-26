@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Smart Water Safety Detector by Group WD-73">
+  <title>Smart Water Safety Detector · Group WD-73</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="vars.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader-drop"><span></span></div>
+    <div class="loader-label">INITIALIZING WATER SAFETY SYSTEM</div>
+  </div>
+
+  <div class="background-grid" aria-hidden="true"></div>
+
+  <header class="navbar" id="navbar">
+    <a class="brand" href="#home" aria-label="Group WD-73 home">Group WD-73</a>
+    <button class="menu-btn" id="menuBtn" type="button" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+    <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+      <a href="#home">Home</a>
+      <a href="#dashboard">Dashboard</a>
+      <a href="#about">About</a>
+      <a href="#sensors">Sensors</a>
+      <a href="#team">Team</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero section-anchor" id="home">
+      <div class="hero-lines" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="container hero-grid reveal">
+        <div>
+          <div class="eyebrow">Group WD-73</div>
+          <h1>Smart Water<br><span>Safety Detector</span></h1>
+          <p class="hero-copy">An ESP32-based IoT system designed to monitor water conditions, estimate water depth and detect unauthorized movement around monitored or restricted areas.</p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#dashboard">View dashboard <span>↘</span></a>
+            <a class="btn secondary" href="#sensors">Explore sensors</a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="eyebrow muted">LIVE SYSTEM STATE</div>
+          <div class="hero-status" id="heroStatus">—</div>
+          <div class="hero-status-line"><span class="status-dot" id="heroDot"></span><span id="heroStatusText">Waiting for sensor data</span></div>
+          <div class="hero-connection"><span id="connectionDot"></span><span id="connectionText">Connecting…</span></div>
+        </div>
+      </div>
+      <a class="scroll-cue" href="#dashboard" aria-label="Scroll to dashboard" style="animation: none;"><span>↓</span></a>
+    </section>
+
+    <section class="section dashboard section-anchor" id="dashboard">
+      <div class="container">
+        <div class="section-head reveal">
+          <div><div class="kicker">01 · MONITORING</div><h2>Live Dashboard</h2></div>
+        </div>
+
+        <div class="status-bar reveal">
+          <article class="status-card neutral" id="overallCard">
+            <div class="status-label">Overall water status</div>
+            <div class="status-value" id="overallStatus">—</div>
+            <div class="status-sub" id="overallSub">Waiting for live measurements and configured thresholds.</div>
+          </article>
+          <article class="status-card neutral" id="movementCard">
+            <div class="status-label">Security / movement</div>
+            <div class="status-value" id="movementValue">—</div>
+            <div class="status-sub" id="movementSub">Waiting for the PIR sensor.</div>
+          </article>
+        </div>
+
+        <div class="sensor-grid">
+          <article class="sensor-card reveal" data-sensor="temperature">
+            <div class="sensor-top"><div><div class="sensor-title">Temperature</div><div class="sensor-model">DS18B20 · Waterproof Probe</div></div><div class="reading" id="tempValue">—</div></div>
+            <div class="sensor-body">A waterproof digital probe for continuous water temperature monitoring.</div>
+            <div class="sensor-bottom"><div class="unit-switch" aria-label="Temperature unit"><button class="unit active-c" data-unit="c">°C</button><button class="unit purple" data-unit="f">°F</button></div><div class="info-row"><span class="signal">Live value</span><button class="info-btn" data-info="temperature" type="button">i</button></div></div>
+          </article>
+
+          <article class="sensor-card reveal" data-sensor="turbidity">
+            <div class="sensor-top"><div><div class="sensor-title">Clarity</div><div class="sensor-model">MD0591 · Turbidity Sensor</div></div><div class="reading" id="turbidityValue">—</div></div>
+            <div class="sensor-body">Measures cloudiness caused by suspended particles and supports contamination monitoring.</div>
+            <div class="sensor-bottom"><div class="signal">Sensor state</div><button class="info-btn" data-info="turbidity" type="button">i</button></div>
+          </article>
+
+          <article class="sensor-card reveal" data-sensor="depth">
+            <div class="sensor-top"><div><div class="sensor-title">Depth</div><div class="sensor-model">JSN-SR04T · Waterproof Ultrasonic</div></div><div class="reading" id="depthValue">—</div></div>
+            <div class="sensor-body">Uses waterproof ultrasonic distance measurement to estimate water level or depth.</div>
+            <div class="sensor-bottom"><div class="signal">Distance / depth</div><button class="info-btn" data-info="depth" type="button">i</button></div>
+          </article>
+
+          <article class="sensor-card reveal" data-sensor="tds">
+            <div class="sensor-top"><div><div class="sensor-title">Solute Level</div><div class="sensor-model">MD0838 · TDS Sensor</div></div><div class="reading" id="tdsValue">—</div></div>
+            <div class="sensor-body">Measures total dissolved solids to support an overall assessment of water condition.</div>
+            <div class="sensor-bottom"><div class="signal">Dissolved solids</div><button class="info-btn" data-info="tds" type="button">i</button></div>
+          </article>
+
+          <article class="sensor-card wide reveal" data-sensor="pir">
+            <div class="sensor-top"><div><div class="sensor-title">Movement Detection</div><div class="sensor-model">MD0979 · PIR Sensor · Separate ESP32</div></div><div class="reading" id="pirValue">—</div></div>
+            <div class="sensor-body">Detects movement in a monitored area and provides a separate security signal.</div>
+            <div class="sensor-bottom"><div class="signal">Security state</div><button class="info-btn" data-info="pir" type="button">i</button></div>
+          </article>
+        </div>
+        <div class="last-update">Last update: <span id="lastUpdate">—</span></div>
+      </div>
+    </section>
+
+    <section class="section alt section-anchor" id="about">
+      <div class="container about-grid">
+        <div class="reveal"><div class="kicker">02 · PROJECT</div><h2>Built around<br>water safety.</h2></div>
+        <div class="reveal"><p class="about-copy">The Smart Water Safety Detector by Group WD-73 is an IoT-based device built around the ESP32. It combines specialized sensors to monitor key water-quality parameters, measure water depth and identify unauthorized movement in restricted or potentially dangerous areas.</p>
+          <div class="points">
+            <div class="point"><strong>Water quality monitoring</strong><span>Temperature, turbidity and TDS readings provide multiple indicators of water condition.</span></div>
+            <div class="point"><strong>Depth awareness</strong><span>Ultrasonic distance measurements can help estimate water level or depth.</span></div>
+            <div class="point"><strong>Safety alerts</strong><span>Motion detection adds another layer of awareness around monitored spaces.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-anchor" id="sensors">
+      <div class="container">
+        <div class="section-head reveal"><div><div class="kicker">03 · HARDWARE</div><h2>Sensors</h2></div></div>
+        <div class="detail-grid">
+          <article class="detail-card reveal"><div class="sensor-image"><img src="assets/ds18b20.png" alt="DS18B20 waterproof probe"></div><h3>DS18B20</h3><p>Waterproof temperature probe for aquatic temperature monitoring.</p><button class="text-link info-btn-inline" data-info="temperature" type="button">More information →</button></article>
+          <article class="detail-card reveal"><div class="sensor-image"><img src="assets/md0591.png" alt="MD0591 turbidity sensor"></div><h3>MD0591</h3><p>Turbidity sensor for water clarity and suspended-particle detection.</p><button class="text-link info-btn-inline" data-info="turbidity" type="button">More information →</button></article>
+          <article class="detail-card reveal"><div class="sensor-image"><img src="assets/md0838.png" alt="MD0838 TDS sensor"></div><h3>MD0838</h3><p>TDS sensor for dissolved-solids measurement and water-quality indication.</p><button class="text-link info-btn-inline" data-info="tds" type="button">More information →</button></article>
+          <article class="detail-card reveal"><div class="sensor-image"><img src="assets/md0979.png" alt="MD0979 PIR sensor"></div><h3>MD0979</h3><p>PIR sensor for movement detection and security alerts.</p><button class="text-link info-btn-inline" data-info="pir" type="button">More information →</button></article>
+          <article class="detail-card reveal"><div class="sensor-image"><img src="assets/jsn-sr04t.png" alt="JSN-SR04T waterproof ultrasonic sensor"></div><h3>JSN-SR04T</h3><p>Waterproof ultrasonic distance sensor for depth or water-level estimation.</p><button class="text-link info-btn-inline" data-info="depth" type="button">More information →</button></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt section-anchor" id="team">
+      <div class="container">
+        <div class="section-head reveal"><div><div class="kicker">04 · PROJECT TEAM</div><h2>Team WD-73</h2></div></div>
+        <div class="team-layout">
+          <div class="team-card dark reveal"><h3>Smart Water Safety Detector</h3></div>
+          <div class="team-card reveal">
+            <h3>Group WD-73</h3>
+            <div class="team-members">
+              <p>IT26102196 - U. G. A. Y. Ranvida</p>
+              <p>IT26102180 - T. N. Karunarathne</p>
+              <p>IT26102197 - K. D. E. G. Amarasena</p>
+              <p>IT26102190 - W. S. N. Thamel</p>
+              <p>IT26102182 - K. Kajeevan</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="container footer-row" style="justify-content: center; text-align: center;"><span>Smart Water Safety Detector · Group WD-73</span></div></footer>
+
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" id="closeModal" type="button" aria-label="Close">×</button>
+      <div class="modal-grid"><div class="modal-image"><img id="modalImage" src="" alt=""></div><div><div class="kicker">More information</div><h3 id="modalTitle">Sensor</h3><div class="modal-reading" id="modalReading">—</div><p id="modalText"></p></div></div>
+    </div>
+  </div>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
